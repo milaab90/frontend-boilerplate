@@ -1,0 +1,15 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+
+###  node modules ###
+node_modules/
+
+###  prod files ###
+dist/
+assets/css/
+assets/scripts/
