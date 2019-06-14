@@ -1,0 +1,11 @@
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+
+###  node modules ###
+node_modules/
+dist/
+assets/css/
+assets/scripts/

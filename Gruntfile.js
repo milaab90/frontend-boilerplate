@@ -18,6 +18,7 @@ module.exports = function(grunt){
     ],
 
     watch_files : [
+      'index.html',
       'src/less/*/*',
       'src/scripts/*',]
   }
@@ -75,9 +76,29 @@ module.exports = function(grunt){
         ],
       },
     },
+    livereload  : {
+      options   : {
+        base    : 'dist',
+      },
+      files     : ['dist/assets/**/*']
+    },
+    connect: {
+      server: {
+          options: {
+              port: 9000,
+              base: ".",
+              hostname: "localhost",
+              livereload: true,
+              open: true
+          }
+      }
+    },
     watch: {
       src: {
         files: configs.watch_files,
+        options: {
+          livereload: true
+        },
         tasks: ['build']
       }
     }
@@ -90,10 +111,12 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-livereload');
 
   // Register tasks
   grunt.registerTask('build', ['less','cssmin','concat','uglify','copy']);
-  grunt.registerTask('default', ['less','cssmin','concat','uglify','copy']);
+  grunt.registerTask('default', ['less','cssmin','concat','uglify','copy', 'connect', 'watch']);
 
   grunt.event.on('watch', function(action, filepath) {
     grunt.log.writeln(filepath + ' has ' + action);
